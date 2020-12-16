@@ -1,19 +1,24 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
 
-from rest_framework.generics import ListAPIView
-from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
-from django_filters.rest_framework import DjangoFilterBackend
+import json
+import random
+
 
 # Create your views here.
 
 
-def index(ListAPIView):
-    return HttpResponse("Nice!")
+@api_view(["GET"])
+def fact_generator(request):
+    random_number = random.randint(0, 50)
+    with open("assets/facts.json", "r", encoding="utf-8") as facts:
+        response = json.load(facts)
+        random_fact = response[f"{random_number}"]
 
+    random_fact_dict = {
+        "fact": random_fact
+    }
 
-class ProductsPagination(LimitOffsetPagination):
-    default_limit = 3
-    max_limit = 100
+    return Response(random_fact_dict)
