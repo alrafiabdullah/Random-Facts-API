@@ -15,6 +15,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = BASE_DIR / 'templates'
 STATIC_DIR = BASE_DIR / 'static'
+STATICFILES_DIR = BASE_DIR / 'staticfiles'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -23,7 +24,12 @@ STATIC_DIR = BASE_DIR / 'static'
 SECRET_KEY = '-)(4ztedn+sx14w4r03v1*(1fg=u%&pobnz$w8ar5d#1%1e+m!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if socket.gethostname() == "Grenade":
+    DEBUG = True
+    ALLOWED_HOSTS = ["127.0.0.1", ]
+else:
+    DEBUG = False
+    ALLOWED_HOSTS = ["rand-fact.herokuapp.com", ]
 
 ALLOWED_HOSTS = []
 
@@ -128,6 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = STATICFILES_DIR
 STATICFILES_DIRS = [
     STATIC_DIR
 ]
