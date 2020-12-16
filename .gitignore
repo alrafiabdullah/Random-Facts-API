@@ -4,6 +4,7 @@
 
 ### Custom ###
 .vscode
+staticfiles/*
 
 ### Django ###
 *.log
