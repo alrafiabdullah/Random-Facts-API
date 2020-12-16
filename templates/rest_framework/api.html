@@ -1,0 +1,12 @@
+{% extends "rest_framework/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Fact Generator
+{% endblock title %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+{% endblock style %}

@@ -1,0 +1,1 @@
+web: gunicorn random_fact.wsgi
