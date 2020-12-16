@@ -15,8 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = BASE_DIR / 'templates'
-STATIC_DIR = BASE_DIR / 'static'
-STATICFILES_DIR = BASE_DIR / 'staticfiles'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -26,13 +24,11 @@ SECRET_KEY = '-)(4ztedn+sx14w4r03v1*(1fg=u%&pobnz$w8ar5d#1%1e+m!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if socket.gethostname() == "Grenade":
-    DEBUG = True
+    DEBUG = False
     ALLOWED_HOSTS = ["127.0.0.1", ]
 else:
     DEBUG = False
     ALLOWED_HOSTS = ["rand-fact.herokuapp.com", ]
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -58,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 ROOT_URLCONF = 'random_fact.urls'
 
@@ -135,7 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = STATICFILES_DIR
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    STATIC_DIR
+    BASE_DIR / 'static',
 ]
